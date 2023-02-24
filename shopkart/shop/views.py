@@ -4,6 +4,7 @@ from . models import *
 from django.contrib import messages
 from django.http import HttpResponse
 from shop.form import CustomUserForm
+from shop.category_models import BooksCategory, LaptopCategory, MobileCategory
 from django.contrib.auth import authenticate,login,logout
 
 
@@ -66,17 +67,30 @@ def collectionsview(request,name):
 
 
 def product_details(request,cname,pname):
+    product_info = get_product_info(cname)
+    print(product_info.objects.all())
     if(catagory.objects.filter(name=cname,status=0)):
       if(product.objects.filter(name=pname,status=0)):
         products=product.objects.filter(name=pname,status=0).first()
-        return render(request,"shop/products/product_details.html",{"products":products})
+        return render(request,"shop/products/product_details.html",{"products":products, "product_info" : product_info.objects.all(),
+                                                                    "category" : cname.lower()})
       else:
         messages.error(request,"No Such Produtct Found")
         return redirect('collections')
     else:
       messages.error(request,"No Such Catagory Found")
       return redirect('collections')
-    
 
 
-    
+
+def get_product_info(category_name):
+    category        = None
+    category_name   = category_name.lower()
+    if category_name    == "mobile":
+        category = MobileCategory
+    elif category_name  == "laptops":
+        category = LaptopCategory
+    elif category_name  == "books":
+        category = BooksCategory
+
+    return category

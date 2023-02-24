@@ -42,4 +42,16 @@
         </div>
     </div>
 </section>
+
+<section>
+    <div class="product_detail">
+        {% if category == "mobile" %}
+            {% include "shop/products/mobile_information.html" %}
+        {% elif category == "laptops" %}
+            {% include "shop/products/laptop_information.html" %}
+        {% elif category == "books" %}
+            {% include "shop/products/books_information.html" %}
+        {% endif %}
+    </div>
+</section>
 {% endblock content %}

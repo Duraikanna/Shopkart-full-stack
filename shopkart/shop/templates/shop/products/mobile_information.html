@@ -1,0 +1,9 @@
+<section>
+    <div class="mobile_category">
+        {% for product in product_info %}
+            <p>Brand: {{product.brand}}</p>
+            <p>Cellular_tech : {{product.cellular_tech}}</p>
+            <p>Operating System: {{product.os}} </p>
+        {% endfor %}
+    </div>
+</section>
