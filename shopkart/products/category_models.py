@@ -1,5 +1,7 @@
 from django.db import models
 
+from products.models import Product
+
 
 class MobileCategory(models.Model):
     OS_CHOICES          = [
@@ -13,16 +15,11 @@ class MobileCategory(models.Model):
         ("4G", "4G"),
         ("5G", "5G"),
     ]
+    product             = models.OneToOneField(Product, null = True, on_delete=models.CASCADE)
     brand               = models.CharField(max_length=100)
     model               = models.CharField(max_length=100)
     os                  = models.CharField(max_length=30, choices=OS_CHOICES)
     cellular_tech       = models.CharField(max_length=2, choices=Cellular_CHOICES)
-
-
-class BooksCategory(models.Model):
-    publisher           = models.CharField(max_length=200)
-    author              = models.CharField(max_length=100)
-    no_of_pages         = models.IntegerField()
 
 
 class LaptopCategory(models.Model):
@@ -33,6 +30,7 @@ class LaptopCategory(models.Model):
 
     ]
 
+    product             = models.OneToOneField(Product, null=True, on_delete=models.CASCADE)
     brand               = models.CharField(max_length=100)
     series              = models.CharField(max_length=100)
     screen_size         = models.CharField(max_length=100)

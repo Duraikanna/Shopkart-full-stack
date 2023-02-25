@@ -1,4 +1,4 @@
-{% extends 'shop/layouts/main.html' %}
+        {% extends 'shop/layouts/main.html' %}
 
 
 {% block content %}
@@ -22,7 +22,7 @@
                  {% endif %}
                 
                 
-                <a href="{%url 'product_details' item.catagory item.name %}">
+                <a href="{%url 'product_details' item.category item.name %}">
                     <div class="card-body">
                     <h5 class="card-title text-primary">{{ item.name }}</h5>
                     <p class="card-text">
